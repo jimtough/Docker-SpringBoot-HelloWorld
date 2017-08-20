@@ -1,0 +1,43 @@
+This is the tutorial that I followed to get started:
+	https://spring.io/guides/gs/spring-boot-docker/
+
+It recommends using this Maven plugin to build and deploy the Docker image to Docker Hub:
+	<plugin>
+		<groupId>com.spotify</groupId>
+		<artifactId>dockerfile-maven-plugin</artifactId>
+		<version>1.3.4</version>
+		...
+	</plugin>
+
+Unfortunately, things aren't working as advertised. It's very possible that I'm missing some
+configuration related to Docker. I'm going to deviate from the tutorial steps to workaround
+these issues and document what works for me here.
+
+---------------------------------------------------------------------
+
+BUILDING THE APPLICATION FROM MAVEN COMMAND LINE
+
+
+(TODO add the basics here...)
+
+First, ensure that the "Expose daemon on tcp://localhost:2375 without TLS" is enabled in Docker.
+If it isn't, then the Maven Docker plugin will not be able to build an image.
+
+In the Maven pom.xml file, put your own Docker Hub username in the 'docker.image.prefix' property:
+	<properties>
+		<java.version>1.8</java.version>
+		<docker.image.prefix>jtough</docker.image.prefix>
+	</properties>
+
+To build a Docker image from the project code, do this:
+	mvn package
+	
+Use Docker CLI to initialize the connection to the Docker Hub server using your own credentials:
+	docker login -u <YOUR_USERNAME> p- <YOUR_PASSWORD>
+
+Use Docker CLI to push your image to your Docker Hub account:
+	docker push jtough/gs-spring-boot-docker:latest
+	
+ 
+
+
