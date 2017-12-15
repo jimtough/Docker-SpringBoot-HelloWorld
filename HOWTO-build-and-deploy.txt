@@ -34,7 +34,7 @@ To build a Docker image from the project code, do this:
 	mvn package
 	
 Use Docker CLI to initialize the connection to the Docker Hub server using your own credentials:
-	docker login -u <YOUR_USERNAME> p- <YOUR_PASSWORD>
+	docker login -u <YOUR_USERNAME> -p <YOUR_PASSWORD>
 
 Use Docker CLI to push your image to your Docker Hub account:
 	docker push jtough/gs-spring-boot-docker:latest
